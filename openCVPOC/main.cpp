@@ -26,6 +26,22 @@ int main()
 
         output.write(frame);
 
+        if (cv::waitKey(25) == 's')
+        {
+            cv::Mat frame2;
+            frame2 = frame.clone();
+            //cv::CAP_PROP_POS_FRAMES
+            //frameNumber = output.get(cv::CAP_PROP_POS_FRAMES);
+            //cv::capture.get(CV_CAP_PROP_POS_FRAMES);
+            //string frameNum = to_string(frameNumber);
+            time_t now = time(0);
+            string frameNum = to_string(now);
+            string fileNumber = frameNum + ".png";
+            //cv::imshow(frameNum, frame2);
+            cv::imwrite(fileNumber, frame2);
+            //cv::imshow("Captured frame", frame2);
+        }
+
         if (cv::waitKey(25) == 'd')
         {
             break;
