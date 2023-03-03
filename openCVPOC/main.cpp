@@ -18,7 +18,9 @@ int main()
     cv::VideoWriter output("output.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 30, cv::Size(frameWidth, frameHeight));
 
 
-    bool rflag = 0;
+    int rflag = 0;
+
+    cv::VideoWriter favoutput;
 
     while (video.read(frame))
     {
@@ -42,6 +44,28 @@ int main()
             //cv::imshow("Captured frame", frame2);
         }
 
+
+        if (cv::waitKey(25) == 'r' && rflag == 0)
+        {
+            rflag = 1;
+            time_t now = time(0);
+            string frameNum = to_string(now);
+            string fileNumber = frameNum + ".avi";
+            favoutput.open(fileNumber, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 30, cv::Size(frameWidth, frameHeight));
+        }
+
+        if (rflag == 1)
+        {
+            favoutput.write(frame);
+        }
+
+        if (cv::waitKey(25) == 'e')
+        {
+            rflag = 0;
+        }
+
+
+
         if (cv::waitKey(25) == 'd')
         {
             break;
@@ -49,6 +73,7 @@ int main()
     }
 
     output.release();
+    favoutput.release();
     video.release();
 
     cv::destroyAllWindows();
