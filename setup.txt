@@ -1,0 +1,11 @@
+OpenCV installation: 
+
+    1. Install and extract files 
+
+    2. Include “X64/v15/bin” in the environmental variables 
+
+    3. In the project properties edit the C++ -> general -> additional include directories => build/include 
+
+    4. In the project properties edit the linker -> general -> additional library directories => build/x64/v15/lib 
+
+    5. In the project properties edit the linker -> input -> additional directories => opencv_world460.lib (where 460 indicates the version of OpenCV that we use i.e.; 4.60) 
